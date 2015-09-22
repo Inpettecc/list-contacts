@@ -6,8 +6,11 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="msapplication-tap-highlight" content="no" />
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	
+	<!-- Bibliotecas CSS -->
 	<link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/icon.css" />
+	
 	<title>Contacts list</title>
 </head>
 
@@ -25,74 +28,54 @@
 						</p>
 						<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
 					</li>
-					<li class="collection-item avatar">
-						<i class="material-icons circle">folder</i>
-						<span class="title">Title</span>
-						<p>First Line
-							<br> Second Line
-						</p>
-						<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-					</li>
-					<li class="collection-item avatar">
-						<i class="material-icons circle green">insert_chart</i>
-						<span class="title">Title</span>
-						<p>First Line
-							<br> Second Line
-						</p>
-						<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-					</li>
-					<li class="collection-item avatar">
-						<i class="material-icons circle red">play_arrow</i>
-						<span class="title">Title</span>
-						<p>First Line
-							<br> Second Line
-						</p>
-						<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 
+	<!-- Bibliotecas Javascript para o Phonegap -->
+	<!-- Phonegap default imports -->
+	<!--script type="text/javascript" src="cordova.js"></script-->
+	<!--script type="text/javascript" src="js/index.js"></script-->
+	<!--script type="text/javascript">
+        app.initialize();
+    </script-->
+	
+	<!-- Mock do resultado da API de contatos -->
+	<script type="text/javascript" src="js/contatos_mock.js"></script>
+		
+	<!-- Bibliotecas Javascript para o projeto -->
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
 
+	<!-- Lógica do projeto -->
 	<script type="text/javascript" charset="utf-8">
-		// Wait for device API libraries to load
+		// Aguarda até que as APIs do Phonegap estejam prontas.
 		//document.addEventListener("deviceready", listaTodosOsContatos, false);
 
-		// device APIs are available
+		// Caso as APIs do Phonegap já estejam prontas, essa função será chamada.
 		/*
 		function listaTodosOsContatos() {
 		    // find all contacts
 		    var options = new ContactFindOptions();
-		    var fields = ["displayName", "name"];
+		    var fields = ["displayName", "emails", "phoneNumbers"];
 		    navigator.contacts.find(fields, onSuccess, onError, options);
 		}
 		*/
-		// onSuccess: Get a snapshot of the current contacts
-
+		
+		// onSuccess: Caso a busca retorne um resultado positivo, essa função será chamada.
 		function onSuccess(contacts) {
 			for (var i = 0; i < contacts.length; i++) {
 				console.log("Display Name = " + contacts[i].displayName);
 			}
 		}
 
-		// onError: Failed to get the contacts
-
+		// onError: Caso a busca não ocorra por algum erro, essa função será chamada.
 		function onError(contactError) {
 			console.error('error retrieving contatct', contactError);
 		}
 	</script>
-
-	<!-- Javascript imports -->
-	<!-- Phonegap default imports -->
-	<!--script type="text/javascript" src="cordova.js"></script-->
-	<!--script type="text/javascript" src="js/index.js"></script-->
-	<!--script type="text/javascript">
-            app.initialize();
-        </script-->
-	<!-- app specific imports -->
-	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="js/materialize.min.js"></script>
+	
 </body>
 
 </html>
