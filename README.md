@@ -1,7 +1,7 @@
-# phonegap-simple-todo
-This will be the first Phonegap mobile app developed at Inpettecc (Pouso Alegre - MG) "Mobile Development class" a simple TODO list using simple JS stuff.
+# phonegap-contacts-lists
+This mobile app will be developed at Inpettecc (Pouso Alegre - MG) as part of "Mobile Development class" and intent to be a spike on Contacts API.
 
-Este será o primeiro aplicativo móvel desenvolvido na aula de Desenvolvimento Móvel da Inpettecc (Pouso Alegre - MG), uma simples lista de taregas utilizando somente coisas simples de JS.
+Este aplicativo móvel será desenvolvido na aula de Desenvolvimento Móvel da Inpettecc (Pouso Alegre - MG), e tem como objetivo realizar testes com a API de contatos.
 
 Frameworks:
 
