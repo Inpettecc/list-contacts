@@ -20,14 +20,6 @@
 			<div class="col s12">
 				<h2 class="header">Contatos</h2>
 				<ul class="collection">
-					<li class="collection-item avatar">
-						<img src="img/logo.png" alt="" class="circle">
-						<span class="title">Title</span>
-						<p>First Line
-							<br> Second Line
-						</p>
-						<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-					</li>
 				</ul>
 			</div>
 		</div>
@@ -56,7 +48,7 @@
 		// Caso as APIs do Phonegap já estejam prontas, essa função será chamada.
 		/*
 		function listaTodosOsContatos() {
-		    // find all contacts
+		    // Retorna todos os contatos
 		    var options = new ContactFindOptions();
 		    var fields = ["displayName", "emails", "phoneNumbers"];
 		    navigator.contacts.find(fields, onSuccess, onError, options);
@@ -65,15 +57,29 @@
 		
 		// onSuccess: Caso a busca retorne um resultado positivo, essa função será chamada.
 		function onSuccess(contacts) {
+			var html = "";
 			for (var i = 0; i < contacts.length; i++) {
-				console.log("Display Name = " + contacts[i].displayName);
+				html += '<li class="collection-item avatar">';
+				html +=		'<img src="img/logo.png" alt="" class="circle">';
+				html +=		'<span class="title">'+ contacts[i].displayName +'</span>';
+				html +=		'<p>' + contacts[i].phoneNumbers[0].value;
+				html +=			'<br>' + contacts[i].emails[0].value;
+				html +=		'</p>';
+				html +=		'<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>';
+				html +=	'</li>';
 			}
+			var lista = document.querySelector(".collection");
+			lista.innerHTML = html;
 		}
 
 		// onError: Caso a busca não ocorra por algum erro, essa função será chamada.
 		function onError(contactError) {
 			console.error('error retrieving contatct', contactError);
 		}
+		
+		//Forçando chamada da função que montará a lista.
+		//Deletar a linha de baixo quando for deployar no celular
+		onSuccess(contatosMock);
 	</script>
 	
 </body>
