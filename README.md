@@ -7,4 +7,4 @@ Frameworks:
 
 * Materialized CSS (layout) - http://materializecss.com/
 
-Phonegap build page: https://build.phonegap.com/apps/1472136/share
+App download: https://goo.gl/BtkwKF
