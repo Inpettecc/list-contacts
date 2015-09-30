@@ -42,6 +42,7 @@
 
 	<!-- Lógica do projeto -->
 	<script type="text/javascript" charset="utf-8">
+		var _contacts;
 		// Aguarda até que as APIs do Phonegap estejam prontas.
 		//document.addEventListener("deviceready", listaTodosOsContatos, false);
 
@@ -57,6 +58,7 @@
 		
 		// onSuccess: Caso a busca retorne um resultado positivo, essa função será chamada.
 		function onSuccess(contacts) {
+			_contacts = contacts;
 			var html = "";
 			for (var i = 0; i < contacts.length; i++) {
 				html += '<li class="collection-item avatar">';
@@ -65,7 +67,7 @@
 				html +=		'<p>' + contacts[i].phoneNumbers[0].value;
 				html +=			'<br>' + contacts[i].emails[0].value;
 				html +=		'</p>';
-				html +=		'<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>';
+				html +=		'<a onclick="favoritar('+ contacts[i].id +')" href="#!" class="secondary-content"><i class="material-icons">stars</i></a>';
 				html +=	'</li>';
 			}
 			var lista = document.querySelector(".collection");
@@ -75,6 +77,18 @@
 		// onError: Caso a busca não ocorra por algum erro, essa função será chamada.
 		function onError(contactError) {
 			console.error('error retrieving contatct', contactError);
+		}
+		
+		function favoritar(contatoId) {
+			console.log(getContato(contatoId));
+		}
+		
+		function getContato(contatoId) {
+			for(var i = 0; i < _contacts.length; i++) {
+				if(contatoId == _contacts[i].id) {
+					return _contacts[i];
+				}
+			}
 		}
 		
 		//Forçando chamada da função que montará a lista.
