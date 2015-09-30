@@ -27,14 +27,10 @@
 
 	<!-- Bibliotecas Javascript para o Phonegap -->
 	<!-- Phonegap default imports -->
-	<!--script type="text/javascript" src="cordova.js"></script-->
-	<!--script type="text/javascript" src="js/index.js"></script-->
-	<!--script type="text/javascript">
-        app.initialize();
-    </script-->
+	<script type="text/javascript" src="cordova.js"></script>
 	
 	<!-- Mock do resultado da API de contatos -->
-	<script type="text/javascript" src="js/contatos_mock.js"></script>
+	<!--script type="text/javascript" src="js/contatos_mock.js"></script-->
 		
 	<!-- Bibliotecas Javascript para o projeto -->
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
@@ -44,31 +40,39 @@
 	<script type="text/javascript" charset="utf-8">
 		var _contacts;
 		// Aguarda até que as APIs do Phonegap estejam prontas.
-		//document.addEventListener("deviceready", listaTodosOsContatos, false);
+		document.addEventListener("deviceready", listaTodosOsContatos, false);
 
 		// Caso as APIs do Phonegap já estejam prontas, essa função será chamada.
-		/*
 		function listaTodosOsContatos() {
 		    // Retorna todos os contatos
 		    var options = new ContactFindOptions();
-		    var fields = ["displayName", "emails", "phoneNumbers"];
+		    options.multiple=true;
+		    var fields = ["displayName", "emails", "phoneNumbers", "photos"];
 		    navigator.contacts.find(fields, onSuccess, onError, options);
 		}
-		*/
+		
 		
 		// onSuccess: Caso a busca retorne um resultado positivo, essa função será chamada.
 		function onSuccess(contacts) {
 			_contacts = contacts;
 			var html = "";
 			for (var i = 0; i < contacts.length; i++) {
-				html += '<li class="collection-item avatar">';
-				html +=		'<img src="img/logo.png" alt="" class="circle">';
-				html +=		'<span class="title">'+ contacts[i].displayName +'</span>';
-				html +=		'<p>' + contacts[i].phoneNumbers[0].value;
-				html +=			'<br>' + contacts[i].emails[0].value;
-				html +=		'</p>';
-				html +=		'<a onclick="favoritar('+ contacts[i].id +')" href="#!" class="secondary-content"><i class="material-icons">stars</i></a>';
-				html +=	'</li>';
+				if(contacts[i].phoneNumbers && contacts[i].emails) {
+					html += '<li class="collection-item avatar">';
+					
+					if(contacts[i].photos) {
+						html +=		'<img src="'+ contacts[i].photos[0].value +'" alt="" class="circle">';
+					} else {
+						html +=		'<img src="img/logo.png" alt="" class="circle">';
+					}
+					
+					html +=		'<span class="title">'+ contacts[i].displayName +'</span>';	
+					html +=		'<p>' + contacts[i].phoneNumbers[0].value;
+					html +=			'<br>' + contacts[i].emails[0].value;
+					html +=		'</p>';
+					html +=		'<a onclick="favoritar('+ contacts[i].id +')" href="#!" class="secondary-content"><i class="material-icons">stars</i></a>';
+					html +=	'</li>';
+				}
 			}
 			var lista = document.querySelector(".collection");
 			lista.innerHTML = html;
@@ -93,7 +97,7 @@
 		
 		//Forçando chamada da função que montará a lista.
 		//Deletar a linha de baixo quando for deployar no celular
-		onSuccess(contatosMock);
+		//onSuccess(contatosMock);
 	</script>
 	
 </body>
